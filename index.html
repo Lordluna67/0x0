@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lunex Homepage</title>
+    <!-- Combined CSS styles are placed here -->
+    <style>
+        body {
+            background-color: #121212; /* Dark background */
+            color: #e0e0e0; /* Light text color */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #1e1e1e;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #00ff99; /* Accent color */
+        }
+
+        h1 {
+            margin: 0;
+            color: #00ff99;
+        }
+
+        main {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .card {
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            width: 200px;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            border-color: #00ff99; /* Highlight on hover */
+        }
+
+        .card h2 {
+            margin-top: 0;
+            color: #00ff99;
+        }
+
+        .card p {
+            margin-bottom: 0;
+        }
+
+        footer {
+            background-color: #1e1e1e;
+            padding: 10px;
+            text-align: center;
+            font-size: 0.8em;
+            border-top: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lunex Group Portal</h1>
+    </header>
+    <main>
+        <div class="card-container">
+    
+            <a href="file1.html" class="card">
+                <h2>Bakalakala Info</h2>
+                <p>Basic Info</p>
+            </a>
+            <a href="file2.html" class="card">
+                <h2>Blobfish Info</h2>
+                <p>Basic Info</p>
+            </a>
+            <a href="file3.html" class="card">
+                <h2>Furk Info</h2>
+                <p>Basic Info</p>
+            </a>
+            <!-- Copy the <a> tag above to add more links -->
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Lunex Group</p>
+    </footer>
+</body>
+</html>
