@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Blobfish Info</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            background-color: #000; /* black background */
+            color: #fff; /* white text */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        h1 {
+            color: #00ff99;
+            margin-bottom: 20px;
+        }
+        p {
+            line-height: 1.6;
+        }
+        .content {
+            flex: 1; /* pushes buttons to the bottom */
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .bottom-button {
+            padding: 10px 20px;
+            background-color: #00ff99;
+            color: #000;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            text-align: center;
+            display: inline-block;
+        }
+        .bottom-button:hover {
+            background-color: #00cc7a;
+        }
+    </style>
+</head>
+<body>
+
+<!-- LOGIN PROTECTION -->
+<script src="auth.js"></script>
+
+<div class="content">
+    <h1>Blobfish Info</h1>
+
+    <!-- You can add any description text here -->
+    <p>
+        Welcome to the Blobfish Info page. Here you can learn about the Blobfish history and general info.
+    </p>
+</div>
+
+<div class="button-container">
+    <a href="file2.1.html" class="bottom-button">History</a>
+    <a href="file2.2.html" class="bottom-button">INFO</a>
+</div>
+
+</body>
+</html>
