@@ -1,126 +1,302 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lunex Homepage</title>
-    <!-- Combined CSS styles are placed here -->
-    <style>
-        body {
-            background-color: #121212; /* Dark background */
-            color: #e0e0e0; /* Light text color */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lunex Homepage</title>
+  <meta name="description" content="Lunex Group Portal - protected demo site" />
 
-        header {
-            background-color: #1e1e1e;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 2px solid #00ff99; /* Accent color */
-        }
+  <style>
+    :root{
+      --bg:#121212;
+      --panel:#1e1e1e;
+      --muted:#e0e0e0;
+      --accent:#00ff99;
+      --border:#333;
+      --radius:8px;
+      --maxwidth:1100px;
+    }
 
-        h1 {
-            margin: 0;
-            color: #00ff99;
-        }
+    html,body{
+      height:100%;
+      margin:0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background:var(--bg);
+      color:var(--muted);
+    }
 
-        main {
-            flex: 1;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+    header{
+      background:var(--panel);
+      padding:18px;
+      text-align:center;
+      border-bottom:2px solid var(--accent);
+    }
+    header h1{ margin:0; color:var(--accent); font-size:1.4rem; }
 
-        .card-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
+    main{
+      min-height:calc(100vh - 128px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:28px;
+    }
 
-        .card {
-            background-color: #1e1e1e;
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 20px;
-            width: 200px;
-            text-decoration: none;
-            color: inherit;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
+    .container{
+      width:100%;
+      max-width:var(--maxwidth);
+    }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-            border-color: #00ff99; /* Highlight on hover */
-        }
+    .card-container{
+      display:flex;
+      flex-wrap:wrap;
+      gap:20px;
+      justify-content:center;
+    }
 
-        .card h2 {
-            margin-top: 0;
-            color: #00ff99;
-        }
+    .card{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:18px;
+      width:220px;
+      text-decoration:none;
+      color:inherit;
+      transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      box-shadow:0 6px 14px rgba(0,0,0,.35);
+    }
+    .card:hover{
+      transform:translateY(-6px);
+      box-shadow:0 12px 28px rgba(0,0,0,.5);
+      border-color:var(--accent);
+    }
+    .card h2{ margin:0 0 8px 0; color:var(--accent); font-size:1.05rem; }
+    .card p{ margin:0; color:#bfcfc0; font-size:.95rem; }
 
-        .card p {
-            margin-bottom: 0;
-        }
+    footer{
+      background:var(--panel);
+      padding:12px;
+      text-align:center;
+      border-top:1px solid var(--border);
+      font-size:.9rem;
+    }
 
-        footer {
-            background-color: #1e1e1e;
-            padding: 10px;
-            text-align: center;
-            font-size: 0.8em;
-            border-top: 1px solid #333;
-        }
-    </style>
+    /* Login modal overlay */
+    .overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.6);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:1000;
+    }
+    .login-card{
+      background:linear-gradient(180deg, rgba(30,30,30,1), rgba(20,20,20,1));
+      border:1px solid var(--border);
+      border-radius:12px;
+      padding:22px;
+      width:360px;
+      box-shadow:0 18px 48px rgba(0,0,0,0.6);
+    }
+    .login-card h3{
+      margin:0 0 10px 0;
+      color:var(--accent);
+      font-size:1.2rem;
+    }
+    .login-card p{ margin:0 0 16px 0; color:#bfcfc0; font-size:.95rem; }
+    .form-row{ display:flex; gap:8px; margin-bottom:12px; }
+    input[type="password"]{
+      flex:1;
+      padding:10px 12px;
+      border-radius:8px;
+      border:1px solid var(--border);
+      background:#0f0f0f;
+      color:var(--muted);
+      outline:none;
+      font-size:1rem;
+    }
+    button{
+      background:var(--accent);
+      color:#001;
+      border:none;
+      padding:10px 14px;
+      border-radius:8px;
+      cursor:pointer;
+      font-weight:600;
+      transition:transform .12s ease;
+    }
+    button:active{ transform:translateY(1px); }
+    .small{ font-size:.85rem; color:#b0cdb0; margin-top:8px; }
+
+    /* Responsive tweaks */
+    @media (max-width:420px){
+      .login-card{ width:92%; padding:16px; }
+      .card{ width:160px; padding:14px; }
+    }
+
+    /* hidden helper */
+    [hidden]{ display:none !important; }
+  </style>
 </head>
 <body>
-    <script>
-    const CORRECT_PASSWORD = "lunex2025"; // change this
+  <!-- Optional external config: create config.js in repo with:
+       const SITE_PASSWORD = "your-secret"; -->
+  <script>
+    // Try to load config.js if present - this file must exist in the repo root to override the default.
+    // If you don't want to create config.js, change FALLBACK_PASSWORD below.
+    (function loadConfig(){
+      const s = document.createElement('script');
+      s.src = 'config.js';
+      s.async = false; // load synchronously so SITE_PASSWORD is available
+      s.onload = function(){ /* config.js loaded, window.SITE_PASSWORD should be set */ };
+      s.onerror = function(){ /* ignore if not present */ };
+      document.head.appendChild(s);
+    })();
+  </script>
 
-    const entered = prompt("Enter the site password:");
+  <header>
+    <h1>Lunex Group Portal</h1>
+  </header>
 
-    if (entered !== CORRECT_PASSWORD) {
-        document.body.innerHTML = `
-            <div style="background:#121212;color:#e0e0e0;
-                        display:flex;align-items:center;
-                        justify-content:center;height:100vh;
-                        font-family:sans-serif;">
-                <h1>Access denied</h1>
-            </div>
-        `;
-        throw new Error("Unauthorized");
-    }
-</script>
-    <header>
-        <h1>Lunex Group Portal</h1>
-    </header>
-    <main>
-        <div class="card-container">
-    
-            <a href="file1.html" class="card">
-                <h2>Bakalakala Info</h2>
-                <p>Basic Info</p>
-            </a>
-            <a href="file2.html" class="card">
-                <h2>Blobfish Info</h2>
-                <p>Basic Info</p>
-            </a>
-            <a href="file3.html" class="card">
-                <h2>Furk Info</h2>
-                <p>Basic Info</p>
-            </a>
-            <!-- Copy the <a> tag above to add more links -->
+  <!-- Login overlay -->
+  <div id="login-overlay" class="overlay" aria-hidden="true" hidden>
+    <div class="login-card" role="dialog" aria-labelledby="login-title" aria-modal="true">
+      <h3 id="login-title">Enter site password</h3>
+      <p>Only authorized members may proceed. (Demo protection — not secure)</p>
+
+      <form id="login-form" autocomplete="off">
+        <div class="form-row">
+          <input id="password-input" type="password" name="password" placeholder="Password" aria-label="Password" required />
+          <button id="login-btn" type="submit">Enter</button>
         </div>
-    </main>
-    <footer>
-        <p>&copy; 2025 Lunex Group</p>
-    </footer>
+        <div style="display:flex;justify-content:space-between;align-items:center;">
+          <label style="font-size:.85rem;color:#bfcfc0;">
+            <input id="remember-checkbox" type="checkbox" style="margin-right:6px;" /> Remember
+          </label>
+          <button id="clear-btn" type="button" style="background:transparent;color:var(--muted);border:1px solid var(--border);padding:8px;border-radius:8px;">Clear</button>
+        </div>
+        <div id="login-error" class="small" style="color:#ff7777;display:none;margin-top:8px;">Wrong password — try again.</div>
+      </form>
+      <p class="small">Password is stored in the repository (easy to view). For real privacy use server-side auth.</p>
+    </div>
+  </div>
+
+  <!-- Main site content -->
+  <main id="site-content" class="container" hidden>
+    <div class="card-container">
+      <a href="file1.html" class="card">
+        <h2>Bakalakala Info</h2>
+        <p>Basic Info</p>
+      </a>
+      <a href="file2.html" class="card">
+        <h2>Blobfish Info</h2>
+        <p>Basic Info</p>
+      </a>
+      <a href="file3.html" class="card">
+        <h2>Furk Info</h2>
+        <p>Basic Info</p>
+      </a>
+      <!-- add more cards as needed -->
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Lunex Group — <a id="logout-link" href="#" style="color:var(--accent);text-decoration:none;">Logout</a></p>
+  </footer>
+
+  <script>
+    (function(){
+      // Fallback password — change this if you aren't using config.js
+      const FALLBACK_PASSWORD = "lunex2025";
+
+      // Accept site password from config.js if it defines SITE_PASSWORD (config.js must be in repo root)
+      // If both are present, config.js overrides fallback.
+      const SITE_PASSWORD = (typeof SITE_PASSWORD !== 'undefined') ? SITE_PASSWORD : FALLBACK_PASSWORD;
+
+      const KEY = 'lunex_auth_v1'; // localStorage key
+      const overlay = document.getElementById('login-overlay');
+      const content = document.getElementById('site-content');
+      const form = document.getElementById('login-form');
+      const input = document.getElementById('password-input');
+      const rememberCheckbox = document.getElementById('remember-checkbox');
+      const errorBox = document.getElementById('login-error');
+      const logoutLink = document.getElementById('logout-link');
+      const clearBtn = document.getElementById('clear-btn');
+
+      function showContent(){
+        overlay.hidden = true;
+        overlay.setAttribute('aria-hidden','true');
+        content.hidden = false;
+        // focus first card for keyboard users
+        const firstCard = document.querySelector('.card');
+        if(firstCard) firstCard.focus?.();
+      }
+
+      function showLogin(){
+        content.hidden = true;
+        overlay.hidden = false;
+        overlay.setAttribute('aria-hidden','false');
+        input.value = '';
+        input.focus();
+      }
+
+      function isAuthenticated(){
+        try{
+          const flag = localStorage.getItem(KEY);
+          return flag === '1';
+        }catch(e){ return false; }
+      }
+
+      function setAuthenticated(remember){
+        try{
+          if(remember) localStorage.setItem(KEY, '1');
+          else localStorage.removeItem(KEY); // temporary session only (will require re-login on refresh)
+        }catch(e){}
+      }
+
+      // Initialize
+      if(isAuthenticated()){
+        showContent();
+      } else {
+        showLogin();
+      }
+
+      // Handle form submit
+      form.addEventListener('submit', function(evt){
+        evt.preventDefault();
+        errorBox.style.display = 'none';
+        const val = input.value ?? '';
+        if(val === SITE_PASSWORD){
+          setAuthenticated(rememberCheckbox.checked);
+          showContent();
+        } else {
+          errorBox.style.display = 'block';
+          input.select();
+        }
+      });
+
+      // Logout handler
+      logoutLink.addEventListener('click', function(evt){
+        evt.preventDefault();
+        try{ localStorage.removeItem(KEY); }catch(e){}
+        // show login again
+        showLogin();
+      });
+
+      // Clear button: clear localStorage and input
+      clearBtn.addEventListener('click', function(){
+        input.value = '';
+        try{ localStorage.removeItem(KEY); }catch(e){}
+      });
+
+      // Prevent content from being focused/read while overlay visible (additional safety)
+      document.addEventListener('focus', function(ev){
+        if(!overlay.hidden && !overlay.contains(ev.target)) {
+          ev.stopPropagation();
+          overlay.querySelector('input')?.focus();
+        }
+      }, true);
+    })();
+  </script>
 </body>
 </html>
