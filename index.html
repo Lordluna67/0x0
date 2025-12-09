@@ -45,113 +45,47 @@ footer {
     padding:10px;
     border-top:1px solid #333;
 }
-#login {
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-.login-box {
-    background:#1e1e1e;
-    padding:30px;
-    border-radius:10px;
-    border:1px solid #333;
-    text-align:center;
-}
-.login-box input {
-    padding:10px;
-    width:200px;
-    border-radius:5px;
-    border:none;
-}
-.login-box button {
-    margin-top:10px;
-    padding:10px;
-    width:100%;
-    background:#00ff99;
-    border:none;
-    cursor:pointer;
-}
-#logout-btn {
-    margin-left:10px;
-    padding:5px 10px;
-    background:#ff5555;
-    border:none;
-    border-radius:5px;
-    cursor:pointer;
-    color:#000;
-}
 </style>
 </head>
 <body>
 
-<!-- LOGIN -->
-<div id="login">
-    <div class="login-box">
-        <h2>Login</h2>
-        <input type="password" id="password" placeholder="Password">
-        <br>
-        <button onclick="login()">Login</button>
-        <p id="error" style="color:red;"></p>
-    </div>
-</div>
-
-<!-- SITE CONTENT -->
-<div id="site" style="display:none;">
-    <header>
-        <h1>Lunex Group Portal <button id="logout-btn">Logout</button></h1>
-    </header>
-
-    <main>
-        <div class="card-container">
-            <a href="file1.html" class="card">
-                <h2>Bakalakala Info</h2>
-                <p>Basic Info</p>
-            </a>
-            <a href="file2.html" class="card">
-                <h2>Blobfish Info</h2>
-                <p>Basic Info</p>
-            </a>
-            <a href="file3.html" class="card">
-                <h2>Furk Info</h2>
-                <p>Basic Info</p>
-            </a>
-        </div>
-    </main>
-
-    <footer>
-        <p>&copy; 2025 Lunex Group</p>
-    </footer>
-</div>
-
 <script>
-const PASSWORD = "726f6f74"; // CHANGE THIS
+const PASSWORD = "726f6f74"; // Change this to your desired password
 
-// Check if already logged in
-if (localStorage.getItem("auth") === "true") {
-    document.getElementById("login").style.display = "none";
-    document.getElementById("site").style.display = "block";
+// Prompt user immediately
+let entered = prompt("Enter the site password:");
+
+// If wrong password, block site
+if (entered !== PASSWORD) {
+    document.body.innerHTML = "<h1 style='text-align:center;margin-top:50px;'>Access Denied</h1>";
+    throw new Error("Unauthorized");
 }
-
-// Login function
-function login() {
-    const input = document.getElementById("password").value;
-    if (input === PASSWORD) {
-        localStorage.setItem("auth", "true");
-        document.getElementById("login").style.display = "none";
-        document.getElementById("site").style.display = "block";
-    } else {
-        document.getElementById("error").textContent = "Wrong password";
-    }
-}
-
-// Logout button
-document.getElementById("logout-btn").addEventListener("click", () => {
-    localStorage.removeItem("auth");
-    document.getElementById("site").style.display = "none";
-    document.getElementById("login").style.display = "flex";
-});
 </script>
+
+<header>
+    <h1>Lunex Group Portal</h1>
+</header>
+
+<main>
+    <div class="card-container">
+        <a href="file1.html" class="card">
+            <h2>Bakalakala Info</h2>
+            <p>Basic Info</p>
+        </a>
+        <a href="file2.html" class="card">
+            <h2>Blobfish Info</h2>
+            <p>Basic Info</p>
+        </a>
+        <a href="file3.html" class="card">
+            <h2>Furk Info</h2>
+            <p>Basic Info</p>
+        </a>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2025 Lunex Group</p>
+</footer>
 
 </body>
 </html>
