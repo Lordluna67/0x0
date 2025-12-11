@@ -1,5 +1,5 @@
-// auth.js
-const PASSWORD = "726f6f74"; // Change this
+/ auth.js
+const hashedPassword = "b6d81b360d3b89f4b9f1f4b1d093ff322d15c7d1d93d4501e4eaf7c87624199e"; // Change this
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -39,12 +39,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.body.appendChild(loginOverlay);
 
+    // Hash the entered password using SHA-256
+    function hashPassword(password) {
+        return crypto.subtle.digest('SHA-256', new TextEncoder().encode(password))
+            .then(hashBuffer => {
+                // Convert ArrayBuffer to hex string
+                let hashArray = Array.from(new Uint8Array(hashBuffer));
+                let hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+                return hashHex;
+            });
+    }
+
     // Login button logic
-    document.getElementById("login-btn").addEventListener("click", () => {
+    document.getElementById("login-btn").addEventListener("click", async () => {
         const input = document.getElementById("password-input").value;
         const error = document.getElementById("error-message");
 
-        if (input === PASSWORD) {
+        const hashedInput = await hashPassword(input);
+
+        if (hashedInput === hashedPassword) {
             // Hide login overlay
             loginOverlay.style.display = "none";
             // Show page content
